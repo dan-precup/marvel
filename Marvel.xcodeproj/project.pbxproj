@@ -63,6 +63,10 @@
 		869345A727AC258A00FBA782 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345A527AC258A00FBA782 /* Hero.swift */; };
 		869345A927AC25D000FBA782 /* CountableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345A827AC25D000FBA782 /* CountableProperty.swift */; };
 		869345AA27AC25D000FBA782 /* CountableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345A827AC25D000FBA782 /* CountableProperty.swift */; };
+		869345AC27AC289600FBA782 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AB27AC289600FBA782 /* Comic.swift */; };
+		869345AD27AC289600FBA782 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AB27AC289600FBA782 /* Comic.swift */; };
+		869345AF27AC295100FBA782 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AE27AC295100FBA782 /* Price.swift */; };
+		869345B027AC295100FBA782 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AE27AC295100FBA782 /* Price.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +123,8 @@
 		869345A227AC24DE00FBA782 /* PagedResultsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedResultsContainer.swift; sourceTree = "<group>"; };
 		869345A527AC258A00FBA782 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		869345A827AC25D000FBA782 /* CountableProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableProperty.swift; sourceTree = "<group>"; };
+		869345AB27AC289600FBA782 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
+		869345AE27AC295100FBA782 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +317,8 @@
 				8693459F27AC249700FBA782 /* DataContainer.swift */,
 				869345A227AC24DE00FBA782 /* PagedResultsContainer.swift */,
 				869345A527AC258A00FBA782 /* Hero.swift */,
+				869345AB27AC289600FBA782 /* Comic.swift */,
+				869345AE27AC295100FBA782 /* Price.swift */,
 				869345A827AC25D000FBA782 /* CountableProperty.swift */,
 			);
 			path = Models;
@@ -455,6 +463,7 @@
 				8693459627AC00EF00FBA782 /* URL+Extension.swift in Sources */,
 				8693458027ABF69800FBA782 /* LocalStorageService.swift in Sources */,
 				8693456E27ABF57F00FBA782 /* HeroListViewModel.swift in Sources */,
+				869345AC27AC289600FBA782 /* Comic.swift in Sources */,
 				8693457727ABF60900FBA782 /* LoadingNotifier.swift in Sources */,
 				8693458327ABF6D700FBA782 /* Log.swift in Sources */,
 				869345A627AC258A00FBA782 /* Hero.swift in Sources */,
@@ -471,6 +480,7 @@
 				8693458D27ABF9A900FBA782 /* NetworkEndpoint.swift in Sources */,
 				8693455E27ABF48E00FBA782 /* Coordinatable.swift in Sources */,
 				8693459927AC1DEC00FBA782 /* ErrorResponse.swift in Sources */,
+				869345AF27AC295100FBA782 /* Price.swift in Sources */,
 				8693456127ABF4D600FBA782 /* AppCoordinator.swift in Sources */,
 				8693459227ABFB1200FBA782 /* MarvelEndpoint.swift in Sources */,
 			);
@@ -489,10 +499,12 @@
 				869345AA27AC25D000FBA782 /* CountableProperty.swift in Sources */,
 				8693455B27ABF3EE00FBA782 /* BaseCoordinator.swift in Sources */,
 				8693457E27ABF67600FBA782 /* ServiceRegistry.swift in Sources */,
+				869345AD27AC289600FBA782 /* Comic.swift in Sources */,
 				8693459E27AC242200FBA782 /* ImageResource.swift in Sources */,
 				8693459327ABFB1200FBA782 /* MarvelEndpoint.swift in Sources */,
 				8693455F27ABF48E00FBA782 /* Coordinatable.swift in Sources */,
 				869345A727AC258A00FBA782 /* Hero.swift in Sources */,
+				869345B027AC295100FBA782 /* Price.swift in Sources */,
 				8693458E27ABF9A900FBA782 /* NetworkEndpoint.swift in Sources */,
 				8693458427ABF6D700FBA782 /* Log.swift in Sources */,
 				8693459727AC00EF00FBA782 /* URL+Extension.swift in Sources */,
