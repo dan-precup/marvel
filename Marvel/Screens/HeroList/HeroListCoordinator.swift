@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 final class HeroListCoordinatorImpl: BaseCoordinator, HeroListCoordinator {
     
     /// Start the coordinator

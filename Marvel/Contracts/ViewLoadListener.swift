@@ -8,5 +8,7 @@
 import Foundation
 
 protocol ViewLoadedListener {
+    
+    /// Announce the implementor that a view has finished loading
     func didFinishLoading()
 }
