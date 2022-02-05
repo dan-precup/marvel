@@ -100,6 +100,7 @@ extension HeroListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: heroCellId, for: indexPath) as? HeroCell
         else { return UITableViewCell() }
         cell.setHero(hero)
+        cell.delegate = viewModel
         cell.startProgressAnimation(with: 5)
         return cell
     }

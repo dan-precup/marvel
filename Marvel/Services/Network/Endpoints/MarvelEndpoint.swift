@@ -39,6 +39,6 @@ extension MarvelEndpoint: NetworkEndpoint {
         [
             URLQueryItem(name: "offset", value: "\(page * perPage)"),
             URLQueryItem(name: "limit", value: "\(perPage)")
-        ]
+        ] + additionalQueryItems
     }
 }

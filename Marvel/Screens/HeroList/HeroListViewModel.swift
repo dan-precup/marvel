@@ -8,8 +8,10 @@
 import Foundation
 import Combine
 
-protocol HeroListCoordinator: Coordinatable {}
-protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener {
+protocol HeroListCoordinator: Coordinatable {
+    func presentSearch()
+}
+protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener, HeroCellSearchDelegate {
     var heroes: CurrentValueSubject<[Hero], Never> { get }
     func loadNextPageIfPossible()
 }
@@ -24,8 +26,8 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
     /// The marvel api service
     
     private let marvelService: MarvelService
-    /// Current page
     
+    /// Current page
     private var currentPage = -1
     
     /// The max number of items requested per page
@@ -54,6 +56,13 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
             self?.hasNextPage = pagedHeroes.hasNextPage
             self?.isLoading.value = false
         })
+    }
+    
+    
+    //MARK: - Implement HeroCellSearchDelegate
+    
+    func heroCellDidSelectSearch() {
+        coordinator.presentSearch()
     }
 }
 

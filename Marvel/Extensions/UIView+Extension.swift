@@ -136,6 +136,13 @@ extension UIView {
     }
     
     @discardableResult
+    func topTrailingCorner(to view: UIView, top: CGFloat = 0, trailing: CGFloat = 0) -> Self {
+        self.trailing(to: view, constant: trailing)
+         .top(toSafeAreaOf: view, constant: top)
+    }
+    
+    
+    @discardableResult
     func minWidth(_ value: CGFloat) -> Self {
         widthAnchor.constraint(greaterThanOrEqualToConstant: value).isActive = true
         return self
@@ -389,6 +396,13 @@ extension UIView {
             .height(0.5)
         return self
     }
+    
+    @discardableResult
+    func clipped() -> Self {
+        clipsToBounds = true
+        return self
+    }
+    
 }
 
 extension Array where Element: UIView {

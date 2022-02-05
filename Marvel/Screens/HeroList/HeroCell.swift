@@ -8,6 +8,10 @@
 import SDWebImage
 import UIKit
 
+protocol HeroCellSearchDelegate: AnyObject {
+    func heroCellDidSelectSearch()
+}
+
 final class HeroCell: UITableViewCell {
     
     private struct Constants {
@@ -19,6 +23,8 @@ final class HeroCell: UITableViewCell {
         static let progressRadius: CGFloat = 1.5
         static let leftIconsWidth: CGFloat = 20
     }
+    
+    weak var delegate: HeroCellSearchDelegate?
     
     /// The hero image view
     private let heroImage = UIImageView()
@@ -92,6 +98,7 @@ final class HeroCell: UITableViewCell {
             .leading(to: gradientView, constant: UIConstants.spacingDouble)
             .centerY(to: gradientView)
             .trailingToLeading(of: iconsStack, constant: -UIConstants.spacingDouble)
+        
         moreButton.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
     }
     
@@ -105,16 +112,22 @@ final class HeroCell: UITableViewCell {
         progressBar.progressTintColor = .white
         searchButton
             .opacity(Constants.genericAlpha)
+            .dimensions(width: Constants.leftIconsWidth, height: UIConstants.buttonHeight)
             .setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         
         [progressWrapper, searchButton]
             .hStack(spacing: UIConstants.spacing)
             .constrained()
-            .addAsSubview(of: heroImage)
+            .addAsSubview(of: contentView)
             .pinToTop(toSafeAreaOf: heroImage,
                       leading: UIConstants.spacingDouble,
                       trailing: -UIConstants.spacingDouble,
-                      top: UIConstants.spacingDouble)
+                      top: UIConstants.spacingTripe)
+        searchButton.addTarget(self, action: #selector(didSelectSearchButton), for: .touchUpInside)
+    }
+    
+    @objc private func didSelectSearchButton() {
+        delegate?.heroCellDidSelectSearch()
     }
     
     /// Populate the cell with data
