@@ -10,16 +10,24 @@ import UIKit
 
 final class HeroCell: UITableViewCell {
     
+    private struct Constants {
+        static let heroNameSize: CGFloat = 45
+        static let gradientHeight: CGFloat = UIScreen.main.bounds.height * 0.3
+        static let genericAlpha: CGFloat = 0.7
+        static let progressTrackAlpha: CGFloat = 0.3
+        static let progressHeight: CGFloat = 3
+        static let progressRadius: CGFloat = 1.5
+        static let leftIconsWidth: CGFloat = 20
+    }
+    
     /// The hero image view
     private let heroImage = UIImageView()
     
     /// Gradient view
-    private let gradientView = GradientView(colors: [UIColor.black.withAlphaComponent(0).cgColor,
-                                                     UIColor.black.cgColor],
-                                            locations: [0, 1])
+    private let gradientView = GradientView()
     
     /// The name label
-    private let heroNameLabel = UILabel.make(weight: .semibold, size: 45, color: .white, numberOfLines: 2)
+    private let heroNameLabel = UILabel.make(weight: .semibold, size: Constants.heroNameSize, color: .white, numberOfLines: 2)
     
     /// Events count icon
     private let eventsIcon = TitledIcon(imageSystemName: "calendar")
@@ -32,6 +40,12 @@ final class HeroCell: UITableViewCell {
     
     /// The more button
     private let moreButton = UIButton()
+    
+    /// Time progressbar
+    private let progressBar = UIProgressView()
+    
+    /// Search button
+    private let searchButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,19 +66,25 @@ final class HeroCell: UITableViewCell {
         gradientView.constrained()
             .addAsSubview(of: contentView)
             .pinToBottom(of: heroImage)
-            .height(UIScreen.main.bounds.height * 0.3)
+            .height(Constants.gradientHeight)
         
+        setGradientContent()
+        setProgressBar()
+    }
+    
+    /// Sets up the gradient content
+    private func setGradientContent() {
         let iconsStack = [moreButton,
                           eventsIcon,
                           storiesIcon,
                           comicsIcon
         ].vStack(spacing: UIConstants.spacingDouble)
-            .opacity(0.6)
+            .opacity(Constants.genericAlpha)
             .constrained()
             .addAsSubview(of: contentView)
             .bottom(to: heroImage, constant: -UIConstants.spacingQuadruple)
             .trailing(to: heroImage, constant: -UIConstants.spacingDouble)
-            .width(20)
+            .width(Constants.leftIconsWidth)
         
         heroNameLabel.addAsSubview(of: gradientView)
             .constrained()
@@ -73,7 +93,28 @@ final class HeroCell: UITableViewCell {
             .centerY(to: gradientView)
             .trailingToLeading(of: iconsStack, constant: -UIConstants.spacingDouble)
         moreButton.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
-
+    }
+    
+    /// Sets up the progress bar and the search button
+    private func setProgressBar() {
+        let progressWrapper = progressBar
+            .rounded(radius: Constants.progressRadius)
+            .height(Constants.progressHeight)
+            .wrapAndCenterY(minHeight: Constants.progressHeight)
+        progressBar.trackTintColor = .white.withAlphaComponent(Constants.progressTrackAlpha)
+        progressBar.progressTintColor = .white
+        searchButton
+            .opacity(Constants.genericAlpha)
+            .setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        
+        [progressWrapper, searchButton]
+            .hStack(spacing: UIConstants.spacing)
+            .constrained()
+            .addAsSubview(of: heroImage)
+            .pinToTop(toSafeAreaOf: heroImage,
+                      leading: UIConstants.spacingDouble,
+                      trailing: -UIConstants.spacingDouble,
+                      top: UIConstants.spacingDouble)
     }
     
     /// Populate the cell with data
@@ -84,6 +125,21 @@ final class HeroCell: UITableViewCell {
         eventsIcon.setTitle("\(hero.events.available)")
         storiesIcon.setTitle("\(hero.stories.available)")
         comicsIcon.setTitle("\(hero.comics.available)")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        progressBar.setProgress(0, animated: false)
+    }
+    
+    func startProgressAnimation(with duration: TimeInterval) {
+        progressBar.setProgress(0, animated: false)
+        contentView.layoutIfNeeded()
+    
+        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: {
+            self.progressBar.setProgress(1, animated: true)
+        })
+       
     }
     
 }

@@ -65,32 +65,18 @@ final class HeroListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         tableView.addAndPinAsSubview(of: view)
         navigationController?.setNavigationBarHidden(true, animated: false)
-        searchButton
-            .tinted(.white)
-            .dimensions(width: 20, height: 20)
-            .setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        
-        let progressWrapper = progressBar
-            .rounded()
-            .height(10)
-            .wrapAndCenterKeepingDimensions()
-            
-        
-        [progressWrapper, searchButton]
-            .hStack(spacing: UIConstants.spacing)
-            .constrained()
-            .addAsSubview(of: view)
-            .top(toSafeAreaOf: view, constant: UIConstants.spacing)
-            .leading(to: view, constant: UIConstants.spacingDouble)
-            .trailing(to: view, constant: -UIConstants.spacingDouble)
     }
     
     private func setupBindings() {
         viewModel.heroes
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] newHeroes in
-                self?.heros.append(contentsOf: newHeroes)
-                self?.tableView.reloadData()
+                guard let self = self, !newHeroes.isEmpty else { return }
+                let offsetStart = self.heros.count
+                self.heros.append(contentsOf: newHeroes)
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: newHeroes.enumerated().map({ IndexPath(row: offsetStart + $0.offset, section: 0)}), with: .automatic)
+                self.tableView.endUpdates()
             }).store(in: &bag)
     }
     
@@ -101,7 +87,6 @@ final class HeroListViewController: UIViewController {
 }
 
 extension HeroListViewController: UITableViewDelegate {
-    
 }
 
 extension HeroListViewController: UITableViewDataSource {
@@ -115,6 +100,7 @@ extension HeroListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: heroCellId, for: indexPath) as? HeroCell
         else { return UITableViewCell() }
         cell.setHero(hero)
+        cell.startProgressAnimation(with: 5)
         return cell
     }
 }

@@ -15,7 +15,9 @@ final class GradientView: UIView {
     /// The location coordinates
     private let locations: [NSNumber]
     
-    init(colors: [CGColor], locations: [NSNumber]) {
+    init(colors: [CGColor] =  [UIColor.black.withAlphaComponent(0).cgColor,
+                               UIColor.black.cgColor],
+         locations: [NSNumber] = [0, 1]) {
         self.colors = colors
         self.locations = locations
         super.init(frame: .zero)

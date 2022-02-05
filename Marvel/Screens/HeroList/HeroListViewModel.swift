@@ -46,11 +46,13 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
     
     /// Load the next page if we haven't reached the end of the list
     func loadNextPageIfPossible() {
-        guard hasNextPage else { return }
+        guard hasNextPage, !isLoading.value else { return }
         currentPage += 1
+        isLoading.value = true
         handlePublisher(marvelService.getHeroes(page: currentPage, perPage: maxPerPage), completion: { [weak self] pagedHeroes in
             self?.heroes.value = pagedHeroes.results
             self?.hasNextPage = pagedHeroes.hasNextPage
+            self?.isLoading.value = false
         })
     }
 }

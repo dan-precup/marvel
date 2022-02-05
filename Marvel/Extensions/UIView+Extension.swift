@@ -105,6 +105,12 @@ extension UIView {
             .trailing(to: view, constant: trailingMargin)
     }
     
+    @discardableResult
+    func pinVerticaly(to view: UIView, top: CGFloat = 0, bottom: CGFloat = 0) -> Self {
+        return self.top(to: view, constant: top)
+            .bottom(to: view, constant: bottom)
+    }
+    
     
     @discardableResult
     func pinHorizontaly(toSafeAreaOf view: UIView, padding: CGFloat = 0) -> Self {
@@ -118,6 +124,14 @@ extension UIView {
         leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading).isActive = true
         trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing).isActive = true
         bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom).isActive = true
+        return self
+    }
+    
+    @discardableResult
+    func pinToTop(toSafeAreaOf view: UIView, leading: CGFloat = 0, trailing: CGFloat = 0, top: CGFloat = 0) -> Self {
+        leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: leading).isActive = true
+        trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: trailing).isActive = true
+        bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: top).isActive = true
         return self
     }
     
@@ -173,26 +187,22 @@ extension UIView {
     }
     
     @discardableResult
-    func wrapAndCenter(width: CGFloat = 0, height: CGFloat = 0, constrainAxis: NSLayoutConstraint.Axis? = .horizontal) -> UIView {
-        let view = UIView()
+    func wrapAndCenterY(minHeight: CGFloat = 0) -> UIView {
+        let view = UIView().minHeight(minHeight)
         constrained()
             .addAsSubview(of: view)
-            .dimensions(width: width, height: height)
-        
-        guard let constrainAxis = constrainAxis else {
-            centerY(to: view)
-                .centerX(to: view)
-            return view
-        }
-        
-        if constrainAxis == .horizontal {
-            view.width(width)
-            self.centerY(to: view)
-        } else {
-            view.height(height)
-            self.centerX(to: view)
-        }
-        
+            .pinHorizontaly(to: view)
+            .centerY(to: view)
+        return view
+    }
+    
+    @discardableResult
+    func wrapAndCenterX(minWidth: CGFloat = 0) -> UIView {
+        let view = UIView().minWidth(minWidth)
+        constrained()
+            .addAsSubview(of: view)
+            .pin(to: view)
+            .centerY(to: view)
         return view
     }
     
