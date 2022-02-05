@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8659082A27AD356000C92950 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082927AD356000C92950 /* UIView+Extension.swift */; };
+		8659082B27AD356000C92950 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082927AD356000C92950 /* UIView+Extension.swift */; };
+		8659082D27AD358300C92950 /* UIStackView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082C27AD358300C92950 /* UIStackView+Extesnion.swift */; };
+		8659082E27AD358300C92950 /* UIStackView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082C27AD358300C92950 /* UIStackView+Extesnion.swift */; };
+		8659083027AD35AB00C92950 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082F27AD35AB00C92950 /* UIConstants.swift */; };
+		8659083127AD35AB00C92950 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659082F27AD35AB00C92950 /* UIConstants.swift */; };
+		8659083327AD376B00C92950 /* ScollView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083227AD376B00C92950 /* ScollView+Extesnion.swift */; };
+		8659083427AD376B00C92950 /* ScollView+Extesnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083227AD376B00C92950 /* ScollView+Extesnion.swift */; };
+		8659083627AD426E00C92950 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083527AD426E00C92950 /* UIImageView+Extension.swift */; };
+		8659083727AD426E00C92950 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083527AD426E00C92950 /* UIImageView+Extension.swift */; };
+		8659083A27AD58F100C92950 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083927AD58F100C92950 /* GradientView.swift */; };
+		8659083B27AD58F100C92950 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083927AD58F100C92950 /* GradientView.swift */; };
+		8659083D27AD66C900C92950 /* TitledIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083C27AD66C900C92950 /* TitledIcon.swift */; };
+		8659083E27AD66C900C92950 /* TitledIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659083C27AD66C900C92950 /* TitledIcon.swift */; };
 		8693452527ABF19400FBA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693452427ABF19400FBA782 /* AppDelegate.swift */; };
 		8693452727ABF19400FBA782 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8693452627ABF19400FBA782 /* SceneDelegate.swift */; };
 		8693452F27ABF19400FBA782 /* Marvel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8693452D27ABF19400FBA782 /* Marvel.xcdatamodeld */; };
@@ -67,6 +81,11 @@
 		869345AD27AC289600FBA782 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AB27AC289600FBA782 /* Comic.swift */; };
 		869345AF27AC295100FBA782 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AE27AC295100FBA782 /* Price.swift */; };
 		869345B027AC295100FBA782 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869345AE27AC295100FBA782 /* Price.swift */; };
+		86D96F5827AD2B6D008F8D26 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D96F5727AD2B6D008F8D26 /* UITableView+Extension.swift */; };
+		86D96F5A27AD2B9D008F8D26 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D96F5927AD2B9D008F8D26 /* UILabel+Extension.swift */; };
+		86D96F5C27AD2C09008F8D26 /* HeroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D96F5B27AD2C09008F8D26 /* HeroCell.swift */; };
+		86D96F5E27AD2C87008F8D26 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D96F5D27AD2C87008F8D26 /* Collection+Extension.swift */; };
+		86D96F6127AD2D95008F8D26 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 86D96F6027AD2D95008F8D26 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,13 +106,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8659082727AD342600C92950 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8659082927AD356000C92950 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		8659082C27AD358300C92950 /* UIStackView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extesnion.swift"; sourceTree = "<group>"; };
+		8659082F27AD35AB00C92950 /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		8659083227AD376B00C92950 /* ScollView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScollView+Extesnion.swift"; sourceTree = "<group>"; };
+		8659083527AD426E00C92950 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		8659083927AD58F100C92950 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		8659083C27AD66C900C92950 /* TitledIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledIcon.swift; sourceTree = "<group>"; };
 		8693452127ABF19400FBA782 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8693452427ABF19400FBA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8693452627ABF19400FBA782 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8693452E27ABF19400FBA782 /* Marvel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Marvel.xcdatamodel; sourceTree = "<group>"; };
 		8693453027ABF19400FBA782 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8693453327ABF19400FBA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8693453527ABF19400FBA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8693453A27ABF19400FBA782 /* MarvelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8693453E27ABF19400FBA782 /* MarvelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelTests.swift; sourceTree = "<group>"; };
 		8693454427ABF19400FBA782 /* MarvelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +151,10 @@
 		869345A827AC25D000FBA782 /* CountableProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountableProperty.swift; sourceTree = "<group>"; };
 		869345AB27AC289600FBA782 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		869345AE27AC295100FBA782 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
+		86D96F5727AD2B6D008F8D26 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		86D96F5927AD2B9D008F8D26 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		86D96F5B27AD2C09008F8D26 /* HeroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCell.swift; sourceTree = "<group>"; };
+		86D96F5D27AD2C87008F8D26 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86D96F6127AD2D95008F8D26 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +183,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8659083827AD56F800C92950 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8659083927AD58F100C92950 /* GradientView.swift */,
+				8659083C27AD66C900C92950 /* TitledIcon.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		8693451827ABF19400FBA782 = {
 			isa = PBXGroup;
 			children = (
@@ -175,13 +215,15 @@
 		8693452327ABF19400FBA782 /* Marvel */ = {
 			isa = PBXGroup;
 			children = (
+				8659082727AD342600C92950 /* Info.plist */,
 				8693455727ABF3C500FBA782 /* AppDelegate */,
 				8693459B27AC23B700FBA782 /* Models */,
 				8693456327ABF4EF00FBA782 /* Services */,
 				8693455C27ABF48600FBA782 /* Contracts */,
 				8693455827ABF3DA00FBA782 /* Bases */,
 				8693456427ABF50500FBA782 /* Resources */,
-				8693453527ABF19400FBA782 /* Info.plist */,
+				8659083827AD56F800C92950 /* Components */,
+				8693459427AC00E800FBA782 /* Extensions */,
 				8693456527ABF51D00FBA782 /* Screens */,
 			);
 			path = Marvel;
@@ -250,6 +292,7 @@
 				8693453027ABF19400FBA782 /* Assets.xcassets */,
 				8693453227ABF19400FBA782 /* LaunchScreen.storyboard */,
 				8693452D27ABF19400FBA782 /* Marvel.xcdatamodeld */,
+				8659082F27AD35AB00C92950 /* UIConstants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -257,7 +300,6 @@
 		8693456527ABF51D00FBA782 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				8693459427AC00E800FBA782 /* Extensions */,
 				8693456627ABF53300FBA782 /* HeroList */,
 			);
 			path = Screens;
@@ -267,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				8693457027ABF58400FBA782 /* HeroListContracts.swift */,
+				86D96F5B27AD2C09008F8D26 /* HeroCell.swift */,
 				8693456727ABF53D00FBA782 /* HeroListCoordinator.swift */,
 				8693456A27ABF56800FBA782 /* HeroListViewController.swift */,
 				8693456D27ABF57F00FBA782 /* HeroListViewModel.swift */,
@@ -306,6 +349,13 @@
 			isa = PBXGroup;
 			children = (
 				8693459527AC00EF00FBA782 /* URL+Extension.swift */,
+				86D96F5727AD2B6D008F8D26 /* UITableView+Extension.swift */,
+				86D96F5D27AD2C87008F8D26 /* Collection+Extension.swift */,
+				86D96F5927AD2B9D008F8D26 /* UILabel+Extension.swift */,
+				8659083227AD376B00C92950 /* ScollView+Extesnion.swift */,
+				8659082927AD356000C92950 /* UIView+Extension.swift */,
+				8659083527AD426E00C92950 /* UIImageView+Extension.swift */,
+				8659082C27AD358300C92950 /* UIStackView+Extesnion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -340,6 +390,9 @@
 			dependencies = (
 			);
 			name = Marvel;
+			packageProductDependencies = (
+				86D96F6027AD2D95008F8D26 /* SDWebImage */,
+			);
 			productName = Marvel;
 			productReference = 8693452127ABF19400FBA782 /* Marvel.app */;
 			productType = "com.apple.product-type.application";
@@ -412,6 +465,9 @@
 				Base,
 			);
 			mainGroup = 8693451827ABF19400FBA782;
+			packageReferences = (
+				86D96F5F27AD2D95008F8D26 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 8693452227ABF19400FBA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -462,8 +518,11 @@
 				8693458A27ABF8F900FBA782 /* NetworkService.swift in Sources */,
 				8693459627AC00EF00FBA782 /* URL+Extension.swift in Sources */,
 				8693458027ABF69800FBA782 /* LocalStorageService.swift in Sources */,
+				8659082D27AD358300C92950 /* UIStackView+Extesnion.swift in Sources */,
 				8693456E27ABF57F00FBA782 /* HeroListViewModel.swift in Sources */,
+				8659083D27AD66C900C92950 /* TitledIcon.swift in Sources */,
 				869345AC27AC289600FBA782 /* Comic.swift in Sources */,
+				8659083027AD35AB00C92950 /* UIConstants.swift in Sources */,
 				8693457727ABF60900FBA782 /* LoadingNotifier.swift in Sources */,
 				8693458327ABF6D700FBA782 /* Log.swift in Sources */,
 				869345A627AC258A00FBA782 /* Hero.swift in Sources */,
@@ -471,16 +530,24 @@
 				869345A927AC25D000FBA782 /* CountableProperty.swift in Sources */,
 				8693457427ABF5CA00FBA782 /* BaseViewModel.swift in Sources */,
 				8693452527ABF19400FBA782 /* AppDelegate.swift in Sources */,
+				86D96F5827AD2B6D008F8D26 /* UITableView+Extension.swift in Sources */,
 				8693458627ABF8C600FBA782 /* MarvelService.swift in Sources */,
 				8693457A27ABF62A00FBA782 /* ViewLoadListener.swift in Sources */,
 				8693457127ABF58400FBA782 /* HeroListContracts.swift in Sources */,
+				8659083A27AD58F100C92950 /* GradientView.swift in Sources */,
 				8693452F27ABF19400FBA782 /* Marvel.xcdatamodeld in Sources */,
+				86D96F5E27AD2C87008F8D26 /* Collection+Extension.swift in Sources */,
 				8693452727ABF19400FBA782 /* SceneDelegate.swift in Sources */,
+				8659082A27AD356000C92950 /* UIView+Extension.swift in Sources */,
+				86D96F5C27AD2C09008F8D26 /* HeroCell.swift in Sources */,
 				869345A327AC24DE00FBA782 /* PagedResultsContainer.swift in Sources */,
 				8693458D27ABF9A900FBA782 /* NetworkEndpoint.swift in Sources */,
+				8659083327AD376B00C92950 /* ScollView+Extesnion.swift in Sources */,
 				8693455E27ABF48E00FBA782 /* Coordinatable.swift in Sources */,
 				8693459927AC1DEC00FBA782 /* ErrorResponse.swift in Sources */,
 				869345AF27AC295100FBA782 /* Price.swift in Sources */,
+				86D96F5A27AD2B9D008F8D26 /* UILabel+Extension.swift in Sources */,
+				8659083627AD426E00C92950 /* UIImageView+Extension.swift in Sources */,
 				8693456127ABF4D600FBA782 /* AppCoordinator.swift in Sources */,
 				8693459227ABFB1200FBA782 /* MarvelEndpoint.swift in Sources */,
 			);
@@ -492,6 +559,7 @@
 			files = (
 				8693457827ABF60900FBA782 /* LoadingNotifier.swift in Sources */,
 				869345A427AC24DE00FBA782 /* PagedResultsContainer.swift in Sources */,
+				8659083B27AD58F100C92950 /* GradientView.swift in Sources */,
 				8693456C27ABF56800FBA782 /* HeroListViewController.swift in Sources */,
 				8693457B27ABF62A00FBA782 /* ViewLoadListener.swift in Sources */,
 				8693456227ABF4D600FBA782 /* AppCoordinator.swift in Sources */,
@@ -499,20 +567,26 @@
 				869345AA27AC25D000FBA782 /* CountableProperty.swift in Sources */,
 				8693455B27ABF3EE00FBA782 /* BaseCoordinator.swift in Sources */,
 				8693457E27ABF67600FBA782 /* ServiceRegistry.swift in Sources */,
+				8659083E27AD66C900C92950 /* TitledIcon.swift in Sources */,
 				869345AD27AC289600FBA782 /* Comic.swift in Sources */,
 				8693459E27AC242200FBA782 /* ImageResource.swift in Sources */,
 				8693459327ABFB1200FBA782 /* MarvelEndpoint.swift in Sources */,
 				8693455F27ABF48E00FBA782 /* Coordinatable.swift in Sources */,
 				869345A727AC258A00FBA782 /* Hero.swift in Sources */,
 				869345B027AC295100FBA782 /* Price.swift in Sources */,
+				8659082E27AD358300C92950 /* UIStackView+Extesnion.swift in Sources */,
 				8693458E27ABF9A900FBA782 /* NetworkEndpoint.swift in Sources */,
+				8659083127AD35AB00C92950 /* UIConstants.swift in Sources */,
 				8693458427ABF6D700FBA782 /* Log.swift in Sources */,
 				8693459727AC00EF00FBA782 /* URL+Extension.swift in Sources */,
+				8659083427AD376B00C92950 /* ScollView+Extesnion.swift in Sources */,
 				8693457527ABF5CA00FBA782 /* BaseViewModel.swift in Sources */,
 				8693458B27ABF8F900FBA782 /* NetworkService.swift in Sources */,
 				8693457227ABF58400FBA782 /* HeroListContracts.swift in Sources */,
 				8693459A27AC1DEC00FBA782 /* ErrorResponse.swift in Sources */,
+				8659082B27AD356000C92950 /* UIView+Extension.swift in Sources */,
 				8693458127ABF69800FBA782 /* LocalStorageService.swift in Sources */,
+				8659083727AD426E00C92950 /* UIImageView+Extension.swift in Sources */,
 				8693456F27ABF57F00FBA782 /* HeroListViewModel.swift in Sources */,
 				869345A127AC249700FBA782 /* DataContainer.swift in Sources */,
 				8693458727ABF8C600FBA782 /* MarvelService.swift in Sources */,
@@ -842,6 +916,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		86D96F5F27AD2D95008F8D26 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		86D96F6027AD2D95008F8D26 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86D96F5F27AD2D95008F8D26 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8693452D27ABF19400FBA782 /* Marvel.xcdatamodeld */ = {

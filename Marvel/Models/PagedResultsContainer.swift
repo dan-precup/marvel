@@ -13,4 +13,8 @@ struct PagedResultsContainer <T: Codable>: Codable {
     let count: Int
     let limit: Int
     let results: [T]
+    
+    var hasNextPage: Bool {
+        total > offset * count
+    }
 }

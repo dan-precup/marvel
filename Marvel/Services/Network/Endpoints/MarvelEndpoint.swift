@@ -29,14 +29,13 @@ extension MarvelEndpoint: NetworkEndpoint {
         case .heroList(let page, let perPage), .heroComics(let page, let perPage, _):
             return makePagingURLQueryItems(page: page, perPage: perPage)
         case .heroSearch(let page, let perPage, let searchTerm):
-            var queryItems = makePagingURLQueryItems(page: page, perPage: perPage)
-            queryItems.append(URLQueryItem(name: "nameStartsWith", value: searchTerm))
-            return queryItems
-      
+            return makePagingURLQueryItems(page: page,
+                                           perPage: perPage,
+                                           additionalQueryItems: [URLQueryItem(name: "nameStartsWith", value: searchTerm)])
         }
     }
     
-    private func makePagingURLQueryItems(page: Int, perPage: Int) -> [URLQueryItem] {
+    private func makePagingURLQueryItems(page: Int, perPage: Int, additionalQueryItems: [URLQueryItem] = []) -> [URLQueryItem] {
         [
             URLQueryItem(name: "offset", value: "\(page * perPage)"),
             URLQueryItem(name: "limit", value: "\(perPage)")

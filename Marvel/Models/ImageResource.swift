@@ -10,6 +10,7 @@ import Foundation
 struct ImageResource: Codable {
     let path: URL
     let fileExtension: String
+    var url: URL { path.appendingPathExtension(fileExtension) }
     
     enum CodingKeys: String, CodingKey {
         case path
