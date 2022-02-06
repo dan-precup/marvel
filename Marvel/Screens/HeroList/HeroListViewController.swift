@@ -87,6 +87,10 @@ final class HeroListViewController: UIViewController {
 }
 
 extension HeroListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let hero = heros[safe: indexPath.row] else { return }
+        viewModel.heroCellDidSelectDetails(for: hero)
+    }
 }
 
 extension HeroListViewController: UITableViewDataSource {

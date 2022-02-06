@@ -148,11 +148,7 @@ final class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UITableViewDelegate {
-
-}
-
-extension SearchViewController: UITableViewDataSource {
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         spinner.wrapAndPin(top: UIConstants.spacingDouble, bottom: -UIConstants.spacingDouble)

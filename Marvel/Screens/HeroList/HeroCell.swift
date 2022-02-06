@@ -10,6 +10,7 @@ import UIKit
 
 protocol HeroCellSearchDelegate: AnyObject {
     func heroCellDidSelectSearch()
+    func heroCellDidSelectDetails(for: Hero)
 }
 
 final class HeroCell: UITableViewCell {
@@ -23,6 +24,8 @@ final class HeroCell: UITableViewCell {
         static let progressRadius: CGFloat = 1.5
         static let leftIconsWidth: CGFloat = 20
     }
+    /// Current hero
+    private var hero: Hero?
     
     weak var delegate: HeroCellSearchDelegate?
     
@@ -100,6 +103,7 @@ final class HeroCell: UITableViewCell {
             .trailingToLeading(of: iconsStack, constant: -UIConstants.spacingDouble)
         
         moreButton.setImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+        moreButton.addTarget(self, action: #selector(didSelectDetailsButton), for: .touchUpInside)
     }
     
     /// Sets up the progress bar and the search button
@@ -130,6 +134,11 @@ final class HeroCell: UITableViewCell {
         delegate?.heroCellDidSelectSearch()
     }
     
+    @objc private func didSelectDetailsButton() {
+        guard let hero = hero else { return }
+        delegate?.heroCellDidSelectDetails(for: hero)
+    }
+    
     /// Populate the cell with data
     /// - Parameter hero: The hero
     func setHero(_ hero: Hero) {
@@ -138,11 +147,7 @@ final class HeroCell: UITableViewCell {
         eventsIcon.setTitle("\(hero.events.available)")
         storiesIcon.setTitle("\(hero.stories.available)")
         comicsIcon.setTitle("\(hero.comics.available)")
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-//        progressBar.setProgress(0, animated: false)
+        self.hero = hero
     }
     
     func startProgressAnimation(with duration: TimeInterval) {

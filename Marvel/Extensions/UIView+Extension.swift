@@ -9,6 +9,13 @@ import UIKit
 
 extension UIView {
     
+    static func spacer(_ axis: NSLayoutConstraint.Axis, bgColor: UIColor = .systemBackground) -> UIView {
+        let view = UIView()
+            .background(bgColor)
+        view.setContentCompressionResistancePriority(.required, for: axis)
+        return view
+    }
+    
     static func line(ofColor: UIColor = .separator) -> UIView {
         UIView().constrained().background(ofColor)
     }
@@ -261,8 +268,8 @@ extension UIView {
     }
     
     @discardableResult///Constrain the heightAnchor to the widthAnchor of the same view
-    func heightToWidth() -> Self {
-        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
+    func heightToWidth(multiplier: CGFloat = 1) -> Self {
+        heightAnchor.constraint(equalTo: widthAnchor, multiplier: multiplier).isActive = true
         return self
     }
     
@@ -282,12 +289,6 @@ extension UIView {
     func width(percentFromSuperview multiplier: CGFloat = 1) -> Self {
         guard let superview = superview else { return self }
         return width(equalsTo: superview, multiplier: multiplier, constant: 0)
-    }
-    
-    @discardableResult
-    func height(percentFromSuperview multiplier: CGFloat = 1) -> Self {
-        guard let superview = superview else { return self }
-        return height(equalsTo: superview, multiplier: multiplier, constant: 0)
     }
     
     @discardableResult
@@ -403,6 +404,11 @@ extension UIView {
         return self
     }
     
+    @discardableResult
+    func circle() -> Self {
+       layoutIfNeeded()
+        return clipped().rounded(radius: frame.width / 2)
+    }
 }
 
 extension Array where Element: UIView {

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol HeroListCoordinator: Coordinatable {
+protocol HeroListCoordinator: Coordinatable, HeroNavigatable {
     func presentSearch()
 }
 protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener, HeroCellSearchDelegate {
@@ -63,6 +63,10 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
     
     func heroCellDidSelectSearch() {
         coordinator.presentSearch()
+    }
+    
+    func heroCellDidSelectDetails(for hero: Hero) {
+        coordinator.pushToHero(hero)
     }
 }
 

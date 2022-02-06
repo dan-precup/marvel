@@ -6,7 +6,6 @@
 //
 
 import Combine
-import CryptoKit
 import Foundation
 
 enum APIError: Error {
@@ -26,8 +25,6 @@ protocol NetworkService {
 }
 
 final class NetworkServiceImpl: NetworkService {
-    private let publicKey = "5ba3a348b1bcf94d616279390e00c82e"
-    private let privateKey = "5988398be5b8ed9e2f377c08cb50d414dd054640"
     private let jsonDecoder = JSONDecoder()
     /// Singleton instance
     static let shared = NetworkServiceImpl()
@@ -47,9 +44,7 @@ final class NetworkServiceImpl: NetworkService {
     /// - Parameter endpoint: The endpoint
     /// - Returns: The URLRequest
     private func buildRequest(with endpoint: NetworkEndpoint) -> URLRequest {
-        var queryItems = endpoint.queryItems
-        queryItems.append(contentsOf: buildAuthQueryItems())
-        var request = URLRequest(url: endpoint.url.apending(queryItems),
+        var request = URLRequest(url: endpoint.url.apending(endpoint.queryItems),
                                  cachePolicy: endpoint.caching,
                                  timeoutInterval: endpoint.timeout)
         request.httpMethod = endpoint.method.rawValue
@@ -103,20 +98,4 @@ final class NetworkServiceImpl: NetworkService {
               return .unknown(error)
           }
       }
-    
-    /// Builds the auth data
-    /// - Returns: The auth query items
-    private func buildAuthQueryItems() -> [URLQueryItem] {
-        let timestamp = Date.timeIntervalBetween1970AndReferenceDate
-        let hashString = "\(timestamp)\(privateKey)\(publicKey)"
-        let hash = Insecure.MD5
-            .hash(data: hashString.data(using: .utf8)!)
-            .map{String(format: "%02x", $0)}
-            .joined()
-        return [
-            URLQueryItem(name: "hash", value: hash),
-            URLQueryItem(name: "ts", value: "\(timestamp)"),
-            URLQueryItem(name: "apikey", value: publicKey)
-        ]
-    }
 }
