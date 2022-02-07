@@ -45,7 +45,6 @@ final class HeroDetailsViewController: UIViewController {
         table.register(HeroDetailsComicCell.self, forCellReuseIdentifier: comicCellId)
         table.delegate = self
         table.showsVerticalScrollIndicator = false
-        table.contentInsetAdjustmentBehavior = .never
         table.dataSource = self
         table.separatorStyle = .none
         table.setEmptyViewText()
@@ -108,7 +107,7 @@ final class HeroDetailsViewController: UIViewController {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.isReachingEnd() else { return }
-//        viewModel.loadNextPageIfPossible()
+        viewModel.loadNextPageIfPossible()
     }
 }
 

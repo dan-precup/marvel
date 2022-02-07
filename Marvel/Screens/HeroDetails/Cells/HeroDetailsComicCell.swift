@@ -11,7 +11,7 @@ final class HeroDetailsComicCell: UITableViewCell {
     
     private struct Constants {
         static let textSize: CGFloat = 14
-        static let titleSize: CGFloat = 20
+        static let titleSize: CGFloat = 18
         static let imageWidth: CGFloat = UIScreen.main.bounds.width * 0.28
         static let imageHeight: CGFloat = imageWidth * 1.54
     }
@@ -20,7 +20,7 @@ final class HeroDetailsComicCell: UITableViewCell {
     private let comicImage = UIImageView()
     
     /// The name label
-    private let nameLabel = UILabel.make(weight: .bold, size: Constants.titleSize)
+    private let nameLabel = UILabel.make(weight: .semibold, size: Constants.titleSize)
     
     /// The pages label
     private let pagesLabel = UILabel.make(size: Constants.textSize)
@@ -64,7 +64,7 @@ final class HeroDetailsComicCell: UITableViewCell {
     func setComic(_ comic: Comic) {
         comicImage.sd_setImage(with: comic.thumbnail.url, placeholderImage:  UIImage(systemName: "photo"))
         nameLabel.text = comic.title
-        pagesLabel.text = "\(comic.pageCount)"
-        issueNumberLabel.text = "#\(comic.issueNumber)"
+        pagesLabel.text = "\(comic.pageCount) Pages"
+        issueNumberLabel.text = "Issue #\(comic.issueNumber)"
     }
 }

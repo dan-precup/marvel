@@ -28,10 +28,8 @@ final class HeroListViewController: UIViewController {
         table.register(HeroCell.self, forCellReuseIdentifier: heroCellId)
         table.delegate = self
         table.showsVerticalScrollIndicator = false
-        table.contentInsetAdjustmentBehavior = .never
         table.dataSource = self
         table.separatorStyle = .none
-        table.isPagingEnabled = true
         table.setEmptyViewText()
         return table
     }()
@@ -64,7 +62,10 @@ final class HeroListViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .systemBackground
         tableView.addAndPinAsSubview(of: view)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Marvel heros"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didSelectSearch))
+        navigationController?.navigationBar.tintColor = .label
     }
     
     private func setupBindings() {
@@ -84,12 +85,16 @@ final class HeroListViewController: UIViewController {
         guard scrollView.isReachingEnd(aboveEnd: UIScreen.main.bounds.height) else { return }
           viewModel.loadNextPageIfPossible()
     }
+    
+    @objc private func didSelectSearch() {
+        viewModel.didSelectSearch()
+    }
 }
 
 extension HeroListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let hero = heros[safe: indexPath.row] else { return }
-        viewModel.heroCellDidSelectDetails(for: hero)
+        viewModel.didSelectHero(hero)
     }
 }
 
@@ -104,8 +109,6 @@ extension HeroListViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: heroCellId, for: indexPath) as? HeroCell
         else { return UITableViewCell() }
         cell.setHero(hero)
-        cell.delegate = viewModel
-        cell.startProgressAnimation(with: 5)
         return cell
     }
 }
