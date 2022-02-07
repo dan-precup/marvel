@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 enum HeroDetailsCells {
-    case imageAndName(URL, String)
+    case imageAndName(Hero)
     case stats(Hero)
     case description(String)
     case title(String)
@@ -51,7 +51,7 @@ final class HeroDetailsViewModelImpl: BaseViewModel, HeroDetailsViewModel {
     
     func didFinishLoading() {
         var feed: [HeroDetailsCells] = [
-            .imageAndName(hero.thumbnail.url, hero.name),
+            .imageAndName(hero),
             .title("Stats"),
             .stats(hero)
         ]

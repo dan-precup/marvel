@@ -40,7 +40,7 @@ final class HeroDetailsStatsCell: UITableViewCell {
             .wrapAndPin(padding: UIConstants.spacingDouble)
             .background(.systemBackground)
             .rounded()
-            .addAndPinAsSubview(to: contentView)
+            .addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble)
     }
     
     func setHero(_ hero: Hero) {

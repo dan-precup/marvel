@@ -24,6 +24,19 @@ final class HeroCardView: UIView {
     /// The name label
     private let heroNameLabel = UILabel.make(weight: .semibold, size: Constants.heroNameSize, color: .white, numberOfLines: 2)
     
+    /// The shadow container
+    private let shadowView = UIView()
+    
+    /// The views container
+    let containerView = UIView()
+
+    /// Constraints for shadow view
+    private var shadowViewBottomAnchor: NSLayoutConstraint?
+    private var shadowViewTopAnchor: NSLayoutConstraint?
+    private var shadowViewLeadingAnchor: NSLayoutConstraint?
+    private var shadowViewTrailingAnchor: NSLayoutConstraint?
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -34,12 +47,14 @@ final class HeroCardView: UIView {
     }
 
     private func setupUI() {
-        let shadowView = UIView()
-        let containerView = UIView()
-        shadowView.addAndPinAsSubview(of: self, horizontalPadding: UIConstants.spacingDouble, verticalPadding: UIConstants.spacing)
+        shadowView
+            .constrained()
+            .addAsSubview(of: self)
             .shadow()
             .heightToWidth()
             .unclipped()
+        
+        buildConstraints()
         
         containerView.addAndPinAsSubview(of: shadowView)
             .rounded(radius: UIConstants.radiusLarge)
@@ -56,7 +71,6 @@ final class HeroCardView: UIView {
             .shrinkToFit()
             .textShadow()
             .addAndPinAsSubview(of: gradientView, padding: UIConstants.spacingDouble)
-        
     }
     
     /// Populate the cell with data
@@ -67,4 +81,33 @@ final class HeroCardView: UIView {
         self.hero = hero
     }
     
+    func expand() {
+        shadowViewBottomAnchor?.constant = 0
+        shadowViewTopAnchor?.constant = 0
+        shadowViewLeadingAnchor?.constant = 0
+        shadowViewTrailingAnchor?.constant = 0
+        containerView.rounded(radius: 0)
+        shadowView.shadow(shadowOpacity: 0)
+    }
+    
+    func contract() {
+        shadowViewBottomAnchor?.constant = -UIConstants.spacing
+        shadowViewTopAnchor?.constant = UIConstants.spacing
+        shadowViewLeadingAnchor?.constant = UIConstants.spacingDouble
+        shadowViewTrailingAnchor?.constant = -UIConstants.spacingDouble
+        containerView.rounded(radius: UIConstants.radiusLarge)
+        shadowView.shadow()
+    }
+    
+    /// Build the manual constraints so we can manipulated them later
+    private func buildConstraints() {
+        shadowViewBottomAnchor = shadowView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -UIConstants.spacing)
+        shadowViewTopAnchor = shadowView.topAnchor.constraint(equalTo: self.topAnchor, constant: UIConstants.spacing)
+        shadowViewLeadingAnchor = shadowView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: UIConstants.spacingDouble)
+        shadowViewTrailingAnchor = shadowView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -UIConstants.spacingDouble)
+        shadowViewBottomAnchor?.isActive = true
+        shadowViewTopAnchor?.isActive = true
+        shadowViewLeadingAnchor?.isActive = true
+        shadowViewTrailingAnchor?.isActive = true
+    }
 }

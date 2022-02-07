@@ -26,7 +26,7 @@ final class LargeTextCell: UITableViewCell {
             .wrapAndPin(padding: UIConstants.spacingDouble)
             .background(.systemBackground)
             .rounded()
-            .addAndPinAsSubview(of: contentView)
+            .addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble)
     }
     
     func setText(_ text: String) {

@@ -8,7 +8,7 @@
 import SDWebImage
 import UIKit
 
-final class HeroCell: UITableViewCell {
+class HeroCell: UITableViewCell {
    
     let cardView = HeroCardView()
     
@@ -21,7 +21,7 @@ final class HeroCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI() {
+    func setupUI() {
         contentView.tinted(.white)
         selectionStyle = .none
         cardView.addAndPinAsSubview(of: contentView)

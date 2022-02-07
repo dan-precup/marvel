@@ -57,7 +57,10 @@ final class HeroDetailsComicCell: UITableViewCell {
         [imageWrapper, textsStack].hStack(spacing: UIConstants.spacingDouble)
             .wrapAndPin(padding: UIConstants.spacingDouble)
             .background(.systemBackground)
-            .addAndPinAsSubview(to: contentView, bottom: -UIConstants.spacingDouble)
+            .addAndPinAsSubview(to: contentView,
+                                leading: UIConstants.spacingDouble,
+                                trailing: -UIConstants.spacingDouble,
+                                bottom: -UIConstants.spacingDouble)
             .rounded()
     }
     

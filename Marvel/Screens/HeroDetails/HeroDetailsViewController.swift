@@ -44,6 +44,7 @@ final class HeroDetailsViewController: UIViewController {
         table.register(LargeTextCell.self, forCellReuseIdentifier: largeTextCellId)
         table.register(HeroDetailsComicCell.self, forCellReuseIdentifier: comicCellId)
         table.delegate = self
+        table.contentInsetAdjustmentBehavior = .never
         table.showsVerticalScrollIndicator = false
         table.dataSource = self
         table.separatorStyle = .none
@@ -84,16 +85,13 @@ final class HeroDetailsViewController: UIViewController {
     
 
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
         videoView.addAndPinAsSubview(of: view)
         UIView().background(.black.withAlphaComponent(0.8))
             .addAndPinAsSubview(of: view)
         tableView
-            .background(.clear)
-            .wrapAndPin(padding: UIConstants.spacingDouble)
-            .addAndPinAsSubview(of: view)
-            .rounded(radius: UIConstants.radiusLarge)
             .background(.systemGroupedBackground)
+            .addAndPinAsSubview(of: view)
     }
     
     private func setupBindings() {
@@ -124,10 +122,10 @@ extension HeroDetailsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellType = cells[safe: indexPath.row] else { return UITableViewCell() }
         switch cellType {
-        case .imageAndName(let thumbURL, let heroName):
+        case .imageAndName(let hero):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: nameImageCellId, for: indexPath) as? HeroDetailsNameImageCell
             else { return UITableViewCell() }
-            cell.setData(imageURL: thumbURL, name: heroName)
+            cell.setHero(hero)
             return cell
         case .stats(let hero):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: statsCellId, for: indexPath) as? HeroDetailsStatsCell
