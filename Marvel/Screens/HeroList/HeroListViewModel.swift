@@ -61,7 +61,7 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
     }
     
     func didSelectHero(_ hero: Hero) {
-        coordinator.pushToHero(hero)
+        coordinator.presentAnimatedHero(hero)
     }
     
     func didSelectSearch() {

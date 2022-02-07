@@ -91,14 +91,19 @@ final class HeroListViewController: UIViewController {
     }
 }
 
-extension HeroListViewController: UITableViewDelegate {
+extension HeroListViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func getSelectedHeroCard() -> HeroCardView? {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+              let cell = tableView.cellForRow(at: indexPath) as? HeroCell else { return nil }
+        
+        return cell.cardView
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let hero = heros[safe: indexPath.row] else { return }
         viewModel.didSelectHero(hero)
     }
-}
-
-extension HeroListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         heros.count

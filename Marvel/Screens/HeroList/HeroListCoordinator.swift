@@ -8,6 +8,7 @@
 import Foundation
 
 final class HeroListCoordinatorImpl: BaseCoordinator, SearchViewCoordinator {
+    let heroPresentationTansitionManager = HeroPresentationTansitionManager()
     
     /// Start the coordinator
     func start() {
@@ -21,6 +22,6 @@ extension HeroListCoordinatorImpl: HeroListCoordinator {
     func presentSearch() {
         let model = SearchViewModelImpl(coordinator: self)
         let view = SearchViewController(viewModel: model)
-        present(view, presentationStyle: .overCurrentContext)
+        present(view, presentationStyle: .overCurrentContext, animated: false)
     }
 }

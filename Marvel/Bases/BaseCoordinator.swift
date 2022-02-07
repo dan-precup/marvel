@@ -69,16 +69,16 @@ class BaseCoordinator: Coordinatable {
     /// Present a viewController
     /// - Parameter viewController: The view controller
     func present(_ viewController: UIViewController) {
-        present(viewController, presentationStyle: .fullScreen)
+        present(viewController, presentationStyle: .fullScreen, animated: false)
     }
     
     /// Present a viewController
     /// - Parameters:
     ///   - viewController: The view controller
     ///   - presentationStyle: The presentation style
-    func present(_ viewController: UIViewController, presentationStyle: UIModalPresentationStyle) {
+    func present(_ viewController: UIViewController, presentationStyle: UIModalPresentationStyle, animated: Bool) {
         viewController.modalPresentationStyle = presentationStyle
-        navigationController.present(viewController, animated: false)
+        navigationController.present(viewController, animated: animated)
     }
     
     /// Dismiss a view controller
