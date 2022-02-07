@@ -16,7 +16,7 @@ final class HeroPresentationTansitionManager: NSObject {
         static let initialVelocity = CGVector(dx: 0, dy: 4)
         static let targetCloseButtonTopConstraint: CGFloat = 50
         static let initialCloseButtonTopConstraint: CGFloat = -100
-        static let initialCloseButtonTrailingConstraint: CGFloat = Constants.initialCloseButtonTrailingConstraint
+        static let initialCloseButtonTrailingConstraint: CGFloat = 200
 
     }
 
@@ -24,6 +24,7 @@ final class HeroPresentationTansitionManager: NSObject {
     private let extendableBackgroundView = UIView()
     private var closeButtonTrailingConstraint: NSLayoutConstraint?
     private var closeButtonTopConstraint: NSLayoutConstraint?
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 }
 
 extension HeroPresentationTansitionManager: UIViewControllerAnimatedTransitioning {
@@ -53,6 +54,8 @@ extension HeroPresentationTansitionManager: UIViewControllerAnimatedTransitionin
         // add the actual view to the stack
         if isPresenting, let view = toView?.view {
             toView?.view.isHidden = true
+            blurView.alpha = 0
+            blurView.addAndPinAsSubview(of: containerView)
             containerView.addSubview(view)
         }
         
@@ -76,6 +79,7 @@ extension HeroPresentationTansitionManager: UIViewControllerAnimatedTransitionin
                 newCard.isHidden = true
                 originCardView.isHidden = false
                 transitionContext.completeTransition(true)
+                self.extendableBackgroundView.alpha = 0
             } else {
                 newCard.isHidden = true
                 originCardView.isHidden = false
@@ -177,12 +181,14 @@ extension HeroPresentationTansitionManager: UIViewControllerAnimatedTransitionin
                 backgroundView.alpha = 1
                 self.closeButtonTrailingConstraint?.constant = -UIConstants.spacingTripe
                 self.closeButtonTopConstraint?.constant = Constants.targetCloseButtonTopConstraint
+                self.blurView.alpha = 1
                 closeButton.alpha = 1
                 cardView.layoutIfNeeded()
             } else {
                 self.closeButtonTrailingConstraint?.constant = Constants.initialCloseButtonTrailingConstraint
                 self.closeButtonTopConstraint?.constant = Constants.initialCloseButtonTopConstraint
                 closeButton.alpha = 0
+                self.blurView.alpha = 0
                 cardView.contract()
                 backgroundView.alpha = 0
             }

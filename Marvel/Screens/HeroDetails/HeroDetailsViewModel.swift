@@ -70,7 +70,7 @@ final class HeroDetailsViewModelImpl: BaseViewModel, HeroDetailsViewModel {
         isLoading.value = true
         let shouldAddTitle = currentPage == 0
         handlePublisher(marvelService.getComics(with: hero, page: currentPage, perPage: maxPerPage), completion: { [weak self] pagedComics in
-            var comicsCells: [HeroDetailsCells] = shouldAddTitle ? [.title("Comics")] : []
+            var comicsCells: [HeroDetailsCells] = shouldAddTitle && !pagedComics.results.isEmpty ? [.title("Comics")] : []
             comicsCells.append(contentsOf: pagedComics.results.map({ .comic($0) }))
             self?.cells.value.append(contentsOf: comicsCells)
             self?.hasNextPage = pagedComics.hasNextPage
