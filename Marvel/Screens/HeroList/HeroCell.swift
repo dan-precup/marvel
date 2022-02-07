@@ -39,11 +39,15 @@ final class HeroCell: UITableViewCell {
     private func setupUI() {
         contentView.tinted(.white)
         selectionStyle = .none
-        
+        let shadowView = UIView()
         let containerView = UIView()
-        containerView.addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble, verticalPadding: UIConstants.spacing)
-            .rounded(radius: UIConstants.radiusLarge)
+        shadowView.addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble, verticalPadding: UIConstants.spacing)
+            .shadow()
             .heightToWidth()
+            .unclipped()
+        containerView.addAndPinAsSubview(of: shadowView)
+            .rounded(radius: UIConstants.radiusLarge)
+            
         heroImage.addAndPinAsSubview(of: containerView)
             .fill()
             .height(UIScreen.main.bounds.height)
