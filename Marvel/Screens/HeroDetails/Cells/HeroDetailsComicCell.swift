@@ -45,7 +45,7 @@ final class HeroDetailsComicCell: UITableViewCell {
             nameLabel,
             pagesLabel,
             issueNumberLabel,
-            UIView.spacer(.vertical)
+            UIView.spacer(.vertical, bgColor: .secondarySystemGroupedBackground)
         ].vStack()
      
         let imageWrapper = comicImage
@@ -56,7 +56,7 @@ final class HeroDetailsComicCell: UITableViewCell {
             .minHeight(Constants.imageHeight)
         [imageWrapper, textsStack].hStack(spacing: UIConstants.spacingDouble)
             .wrapAndPin(padding: UIConstants.spacingDouble)
-            .background(.systemBackground)
+            .background(.secondarySystemGroupedBackground)
             .addAndPinAsSubview(to: contentView,
                                 leading: UIConstants.spacingDouble,
                                 trailing: -UIConstants.spacingDouble,

@@ -38,7 +38,7 @@ final class HeroDetailsStatsCell: UITableViewCell {
         background(.clear)
         [ eventsStack,storiesStack, comicsStack].hStack(distribution: .fillEqually)
             .wrapAndPin(padding: UIConstants.spacingDouble)
-            .background(.systemBackground)
+            .background(.secondarySystemGroupedBackground)
             .rounded()
             .addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble)
     }

@@ -16,6 +16,9 @@ final class HeroListViewController: UIViewController {
     /// Heros storage
     private var heros = [Hero]()
     
+    /// Footer spinner
+    private let spinner = UIActivityIndicatorView.make(started: true)
+    
     /// Cancellable bag
     private var bag = Set<AnyCancellable>()
     
@@ -79,6 +82,7 @@ final class HeroListViewController: UIViewController {
                 self.tableView.insertRows(at: newHeroes.enumerated().map({ IndexPath(row: offsetStart + $0.offset, section: 0)}), with: .automatic)
                 self.tableView.endUpdates()
             }).store(in: &bag)
+        spinner.visibilityBindedTo(viewModel, storedIn: &bag)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -93,11 +97,17 @@ final class HeroListViewController: UIViewController {
 
 extension HeroListViewController: UITableViewDataSource, UITableViewDelegate {
     
+    /// Get a reference to the selected hero card view within the cell
+    /// - Returns: The hero card view
     func getSelectedHeroCard() -> HeroCardView? {
         guard let indexPath = tableView.indexPathForSelectedRow,
               let cell = tableView.cellForRow(at: indexPath) as? HeroCell else { return nil }
         
         return cell.cardView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        spinner.wrapAndPin(top: UIConstants.spacingDouble, bottom: -UIConstants.spacingDouble)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

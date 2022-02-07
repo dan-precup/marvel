@@ -86,6 +86,7 @@ final class HeroDetailsViewController: UIViewController {
             .tinted(.white)
             .setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
         closeButton.addTarget(self, action: #selector(didSelectCloseButton), for: .touchUpInside)
+        closeButton.isHidden = !isBeingPresented
     }
     
     private func setupBindings() {

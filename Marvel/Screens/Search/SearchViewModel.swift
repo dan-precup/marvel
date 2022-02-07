@@ -11,15 +11,16 @@ import Combine
 protocol SearchViewCoordinator: HeroNavigatable, Coordinatable {}
 
 protocol SearchViewModel: LoadingNotifier {
-    var results: CurrentValueSubject<[SearchResult], Never> { get }
+    var results: CurrentValueSubject<[Hero], Never> { get }
     func didTypeSearchTerm(_ term: String)
+    func didSelectHero(_ hero: Hero)
     func loadNextPageIfPossible()
 }
 
 final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     
     /// The results container
-    let results = CurrentValueSubject<[SearchResult], Never>([])
+    let results = CurrentValueSubject<[Hero], Never>([])
     
     /// The coordinator
     private let coordinator: SearchViewCoordinator
@@ -77,10 +78,15 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
         isLoading.value = true
         currentPage += 1
         searchCancellable = handlePublisherWithoutStoring(marvelService.searchForHero(nameStartingWith: term, page: currentPage, perPage: maxPerPage), completion: { [weak self] pagedResults in
-            self?.results.value.append(contentsOf: pagedResults.results.map({ SearchResult.fromHero($0) }))
+            self?.results.value.append(contentsOf: pagedResults.results)
             self?.hasNextPage = pagedResults.hasNextPage
             self?.isLoading.value = false
         })
+    }
+    
+    func didSelectHero(_ hero: Hero) {
+        coordinator.dismiss()
+        coordinator.pushToHero(hero)
     }
 }
 

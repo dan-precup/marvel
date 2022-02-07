@@ -24,7 +24,7 @@ final class LargeTextCell: UITableViewCell {
         selectionStyle = .none
         largeTextLabel
             .wrapAndPin(padding: UIConstants.spacingDouble)
-            .background(.systemBackground)
+            .background(.secondarySystemGroupedBackground)
             .rounded()
             .addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble)
     }

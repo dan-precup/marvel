@@ -29,7 +29,7 @@ final class SearchViewController: UIViewController {
     private let searchCellResultId = "searchCellResultId"
     
     /// Search results container
-    private var searchResults = [SearchResult]()
+    private var searchResults = [Hero]()
     
     /// The close button
     private let closeButton = UIButton()
@@ -154,17 +154,20 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         spinner.wrapAndPin(top: UIConstants.spacingDouble, bottom: -UIConstants.spacingDouble)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let hero = searchResults[safe: indexPath.row] else { return }
+        viewModel.didSelectHero(hero)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let result = searchResults[safe: indexPath.row],
+        guard let hero = searchResults[safe: indexPath.row],
               let cell = tableView.dequeueReusableCell(withIdentifier: searchCellResultId, for: indexPath) as? SearchResultCell
         else { return UITableViewCell() }
-        cell.setResult(result)
+        cell.setHero(hero)
         return cell
     }
-    
-    
 }
