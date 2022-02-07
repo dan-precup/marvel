@@ -25,6 +25,7 @@ class HeroCell: UITableViewCell {
         contentView.tinted(.white)
         selectionStyle = .none
         cardView.addAndPinAsSubview(of: contentView)
+        cardView.tinted(.quaternaryLabel)
     }
     
     /// Populate the cell with data

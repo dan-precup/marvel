@@ -15,5 +15,10 @@ final class ServiceRegistry {
     
     /// The local persistence layer
     let localStorage: LocalStorageService = CoreDataStorage()
+    
+    /// The marvel service
     lazy var marvelService: MarvelService = MarvelServiceImpl.shared
+    
+    /// The cache service
+    lazy var cacheService: CacheService = CacheServiceImpl.shared
 }

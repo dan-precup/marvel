@@ -21,23 +21,55 @@ enum APIError: Error {
 }
 
 protocol NetworkService {
-    func request<T: Decodable>(from endpoint: NetworkEndpoint, decodingTo: T.Type) -> AnyPublisher<T, APIError>
+    func request<T: Codable>(from endpoint: NetworkEndpoint, decodingTo: T.Type) -> AnyPublisher<T, APIError>
 }
 
 final class NetworkServiceImpl: NetworkService {
     private let jsonDecoder = JSONDecoder()
+    
+    /// The cache service
+    private let cacheService: CacheService
+    
     /// Singleton instance
     static let shared = NetworkServiceImpl()
-    private init() {}
+    private init(cacheService: CacheService = ServiceRegistry.shared.cacheService) {
+        self.cacheService = cacheService
+    }
     
-    func request<T: Decodable>(from endpoint: NetworkEndpoint, decodingTo: T.Type) -> AnyPublisher<T, APIError> {
-        URLSession.shared
+    func request<T: Codable>(from endpoint: NetworkEndpoint, decodingTo: T.Type) -> AnyPublisher<T, APIError> {
+        if let value: T = getCachedEntityIfExists(forKey: endpoint.localCacheSignature) {
+            return Just(value).setFailureType(to: APIError.self).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared
             .dataTaskPublisher(for: buildRequest(with: endpoint))
             .tryMap(handleResponse)
             .decode(type: T.self, decoder: jsonDecoder)
             .mapError({ [weak self] error in self?.handleErrorMaping(error, endpoint: endpoint) ?? APIError.unknown(error) })
+            .map({ [weak self] decodedData in
+                self?.setCache(forKey: endpoint.localCacheSignature, entity: decodedData)
+                return decodedData
+            })
             .eraseToAnyPublisher()
-        
+    }
+    
+    
+    /// Set the cache using a given encodable entity
+    private func setCache<T: Codable>(forKey key: String?, entity: T) {
+        guard let cacheKey = key,
+                let encodedData = try? JSONEncoder().encode(entity) else { return }
+        cacheService.setCachedData(forKey: cacheKey, data: encodedData)
+    }
+    
+    /// Get the existing cache if possible
+    /// - Returns: The entity or nil if nothing found
+    private func getCachedEntityIfExists<T: Codable>(forKey key: String?) -> T? {
+        guard let cacheKey = key,
+            let data = cacheService.getCachedDataIfNotExpired(forKey: cacheKey),
+              let decoded = try? jsonDecoder.decode(T.self, from: data) else  {
+            return nil
+        }
+        return decoded
     }
     
     /// Build a request using the endpoint data

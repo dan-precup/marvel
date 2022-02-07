@@ -49,6 +49,7 @@ final class HeroDetailsComicCell: UITableViewCell {
         ].vStack()
      
         let imageWrapper = comicImage
+            .tinted(.quaternaryLabel)
             .fit()
             .dimensions(width: Constants.imageWidth, height: Constants.imageHeight)
             .wrapAndCenterKeepingDimensions()

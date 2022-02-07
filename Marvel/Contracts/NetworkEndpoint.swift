@@ -22,6 +22,9 @@ protocol NetworkEndpoint {
     var contentType: HTTPContentType { get }
     var caching: URLRequest.CachePolicy { get }
     var timeout: TimeInterval { get }
+
+    /// A key used to identity if the request data was cached. Return nil for unchachable requests
+    var localCacheSignature: String? { get }
 }
 
 extension NetworkEndpoint {
