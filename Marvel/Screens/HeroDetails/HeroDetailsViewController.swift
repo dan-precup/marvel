@@ -7,12 +7,12 @@
 
 import Combine
 import UIKit
-import AVKit
 
 final class HeroDetailsViewController: UIViewController {
     
     private struct Constants {
         static let heroNameSize: CGFloat = 30
+        static let topConstraintForCloseButton: CGFloat = 50
     }
     
     /// Local cell container
@@ -25,8 +25,8 @@ final class HeroDetailsViewController: UIViewController {
     private let spinner = UIActivityIndicatorView.make(started: true)
 
     private var bag = Set<AnyCancellable>()
-    private var videoLooper: AVPlayerLooper?
-    private let videoView = UIView()
+    
+    private let closeButton = UIButton()
 
     /// Cell ids
     private let statsCellId = "statsCellId"
@@ -61,6 +61,11 @@ final class HeroDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -68,30 +73,19 @@ final class HeroDetailsViewController: UIViewController {
         viewModel.didFinishLoading()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard let videoURL = Bundle.main.url(forResource: "bgVideo", withExtension: "mp4") else { return }
-        let asset = AVAsset(url: videoURL)
-        let item = AVPlayerItem(asset: asset)
-        let player = AVQueuePlayer(playerItem: item)
-        videoLooper = AVPlayerLooper(player: player, templateItem: item)
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = videoView.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        videoView.layer.addSublayer(playerLayer)
-        player.volume = 0
-        player.play()
-    }
-    
-
     private func setupUI() {
-        view.backgroundColor = .systemGroupedBackground
-        videoView.addAndPinAsSubview(of: view)
-        UIView().background(.black.withAlphaComponent(0.8))
-            .addAndPinAsSubview(of: view)
+        view.backgroundColor = .clear
         tableView
             .background(.systemGroupedBackground)
             .addAndPinAsSubview(of: view)
+        closeButton
+            .constrained()
+            .addAsSubview(of: view)
+            .top(to: view, constant: Constants.topConstraintForCloseButton)
+            .trailing(to: view, constant: -UIConstants.spacingTripe)
+            .tinted(.white)
+            .setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton), for: .touchUpInside)
     }
     
     private func setupBindings() {
@@ -106,6 +100,11 @@ final class HeroDetailsViewController: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.isReachingEnd() else { return }
         viewModel.loadNextPageIfPossible()
+    }
+    
+    
+    @objc private func didSelectCloseButton() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
