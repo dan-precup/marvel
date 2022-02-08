@@ -15,13 +15,13 @@ protocol HeroNavigatable {
 extension HeroNavigatable where Self: Coordinatable {
     
     func pushToHero(_ hero: Hero) {
-        let model = HeroDetailsViewModelImpl(coordinator: self, hero: hero)
+        let model = HeroDetailsViewModelImpl(hero: hero)
         let view = HeroDetailsViewController(viewModel: model)
         push(view)
     }
     
     func presentAnimatedHero(_ hero: Hero) {
-        let model = HeroDetailsViewModelImpl(coordinator: self, hero: hero)
+        let model = HeroDetailsViewModelImpl(hero: hero)
         let view = HeroDetailsViewController(viewModel: model)
         view.transitioningDelegate = heroPresentationTansitionManager
         present(view, presentationStyle: .overCurrentContext, animated: true)

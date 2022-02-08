@@ -11,7 +11,7 @@ extension UITableView {
     
     /// Set an empty label in the table
     /// - Parameter text: The text
-    func setEmptyViewText(_ text: String = "No transactions yet") {
+    func setEmptyViewText(_ text: String = "Nothing to see here") {
         backgroundView = UILabel.make(text, color: .tertiaryLabel)
             .textCentered()
             .font(.systemFont(ofSize: 20, weight: .semibold))

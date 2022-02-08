@@ -17,3 +17,11 @@ struct Hero: Codable {
     let series: CountableProperty
     let stories: CountableProperty
 }
+
+extension Hero: Equatable {
+    static func == (lhs: Hero, rhs: Hero) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.description == rhs.description
+    }
+}

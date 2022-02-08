@@ -16,6 +16,27 @@ enum HeroDetailsCells {
     case comic(Comic)
 }
 
+extension HeroDetailsCells: Equatable {
+    
+    static func == (lhs: HeroDetailsCells, rhs: HeroDetailsCells) -> Bool {
+        switch (lhs, rhs) {
+        case (.imageAndName(let heroLeft), .imageAndName(let heroRight)):
+            return heroLeft == heroRight
+        case (.stats(let heroLeft), .stats(let heroRight)):
+            return heroLeft == heroRight
+        case (.description(let textLeft), .description(let textRight)):
+            return textLeft == textRight
+        case (.title(let textLeft), .title(let textRight)):
+            return textLeft == textRight
+        case (.comic(let comicLeft), .comic(let comicRight)):
+            return comicLeft == comicRight
+        default:
+            return false
+        }
+    }
+    
+}
+
 protocol HeroDetailsViewModel: LoadingNotifier, ViewLoadedListener {
     var cells: CurrentValueSubject<[HeroDetailsCells], Never> { get }
 }
@@ -24,10 +45,7 @@ final class HeroDetailsViewModelImpl: BaseViewModel, HeroDetailsViewModel {
     
     /// Cells container
     let cells = CurrentValueSubject<[HeroDetailsCells], Never>([])
-    
-    /// The coordinator
-    private let coordinator: Coordinatable
-    
+        
     /// The hero
     private let hero: Hero
     
@@ -42,10 +60,9 @@ final class HeroDetailsViewModelImpl: BaseViewModel, HeroDetailsViewModel {
     /// Flag for signaling if we can load a new page
     private var hasNextPage = true
 
-    init(coordinator: Coordinatable, hero: Hero, marvelService: MarvelService = ServiceRegistry.shared.marvelService) {
+    init(hero: Hero, marvelService: MarvelService = ServiceRegistry.shared.marvelService) {
         self.hero = hero
         self.marvelService = marvelService
-        self.coordinator = coordinator
         super.init()
     }
     

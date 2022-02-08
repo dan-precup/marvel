@@ -44,7 +44,7 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     private var hasNextPage = true
     
     /// The search term
-    private var term = ""
+    private(set) var term = ""
     
     init(coordinator: SearchViewCoordinator, marvelService: MarvelService = ServiceRegistry.shared.marvelService) {
         self.coordinator = coordinator
@@ -63,7 +63,7 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     
     /// Reset everything and run the search
     /// - Parameter term: The term
-    private func runSearch(on term: String) {
+    func runSearch(on term: String) {
         self.term = term
         currentPage = -1
         results.value = []

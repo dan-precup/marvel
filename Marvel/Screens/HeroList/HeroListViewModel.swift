@@ -11,6 +11,7 @@ import Combine
 protocol HeroListCoordinator: Coordinatable, HeroNavigatable {
     func presentSearch()
 }
+
 protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener {
     var heroes: CurrentValueSubject<[Hero], Never> { get }
     func loadNextPageIfPossible()
