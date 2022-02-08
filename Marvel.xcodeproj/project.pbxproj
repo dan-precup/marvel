@@ -230,7 +230,7 @@
 		8621CD6127B26F4700D5F304 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8621CD6527B2720C00D5F304 /* HeroDetailsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroDetailsViewTests.swift; sourceTree = "<group>"; };
 		8621CD6727B27DD500D5F304 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8621CD6827B2800E00D5F304 /* Demo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Demo.mov; sourceTree = "<group>"; };
+		8621CD6927B2810800D5F304 /* Demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Demo.mp4; sourceTree = "<group>"; };
 		8659082727AD342600C92950 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8659082927AD356000C92950 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8659082C27AD358300C92950 /* UIStackView+Extesnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extesnion.swift"; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				8621CD6727B27DD500D5F304 /* README.md */,
-				8621CD6827B2800E00D5F304 /* Demo.mov */,
+				8621CD6927B2810800D5F304 /* Demo.mp4 */,
 				8693452327ABF19400FBA782 /* Marvel */,
 				8693453D27ABF19400FBA782 /* MarvelTests */,
 				8693454727ABF19400FBA782 /* MarvelUITests */,
