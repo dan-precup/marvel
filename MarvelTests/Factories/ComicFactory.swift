@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import Marvel
 
 final class ComicFactory {
     static func make(name: String = "The adventures of Iron Man",

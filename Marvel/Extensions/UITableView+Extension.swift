@@ -11,8 +11,9 @@ extension UITableView {
     
     /// Set an empty label in the table
     /// - Parameter text: The text
-    func setEmptyViewText(_ text: String = "Nothing to see here") {
-        backgroundView = UILabel.make(text, color: .tertiaryLabel)
+    func setEmptyViewText(_ text: String = "Nothing to see here", color: UIColor = .tertiaryLabel) {
+        backgroundView = UILabel.make(text, color: color)
+            .identifier("noResultsLabel")
             .textCentered()
             .font(.systemFont(ofSize: 20, weight: .semibold))
         

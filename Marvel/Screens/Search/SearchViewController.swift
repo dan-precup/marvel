@@ -20,10 +20,10 @@ final class SearchViewController: UIViewController {
     private let viewModel: SearchViewModel
     
     /// Blured backgound
-    private let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
+    private let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     /// The searcg textfield
-    private let searchTextfield = UITextField()
+    private let searchTextfield = UITextField().identifier("searchTextField")
     
     /// Cell id
     private let searchCellResultId = "searchCellResultId"
@@ -41,7 +41,7 @@ final class SearchViewController: UIViewController {
         table.showsVerticalScrollIndicator = false
         table.dataSource = self
         table.separatorStyle = .none
-        table.setEmptyViewText()
+        table.setEmptyViewText("No results yet", color: .white)
         return table
     }()
         
@@ -85,6 +85,7 @@ final class SearchViewController: UIViewController {
         spinner.color = .white
         
         closeButton
+            .identifier("closeButton")
             .constrained()
             .addAsSubview(of: view)
             .topTrailingCorner(to: view, top: 0, trailing: -UIConstants.spacingTripe)
@@ -124,6 +125,7 @@ final class SearchViewController: UIViewController {
             .sink(receiveValue: { [weak self] results in
                 self?.searchResults = results
                 self?.tableView.reloadData()
+                self?.tableView.setEmptyViewIfNeededFor(count: results.count)
             }).store(in: &bag)
         spinner.visibilityBindedTo(viewModel, storedIn: &bag)
     }

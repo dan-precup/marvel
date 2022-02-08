@@ -16,13 +16,14 @@ final class HeroCardView: UIView {
     
     private(set) var hero: Hero?
     /// The hero image view
-    private let heroImage = UIImageView()
+    private let heroImage = UIImageView().identifier("heroImage")
     
     /// Gradient view
     private let gradientView = GradientView()
     
     /// The name label
     private let heroNameLabel = UILabel.make(weight: .semibold, size: Constants.heroNameSize, color: .white, numberOfLines: 2)
+        .identifier("heroName")
     
     /// The shadow container
     private let shadowView = UIView()
@@ -48,6 +49,7 @@ final class HeroCardView: UIView {
     }
 
     private func setupUI() {
+        identifier("heroCardView")
         shadowView
             .constrained()
             .addAsSubview(of: self)

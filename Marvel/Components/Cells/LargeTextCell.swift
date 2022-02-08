@@ -8,7 +8,7 @@
 import UIKit
 
 final class LargeTextCell: UITableViewCell {
-    private let largeTextLabel = UILabel.make()
+    private let largeTextLabel = UILabel.make().identifier("largeTextLabel")
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

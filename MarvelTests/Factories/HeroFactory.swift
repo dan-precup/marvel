@@ -6,15 +6,14 @@
 //
 
 import Foundation
-@testable import Marvel
 
 final class HeroFactory {
     static func makeHero(name: String = "Iron Man",
                          description: String = "Some description",
                          comicsCount: Int = 5,
-                         eventsCount: Int = 5,
-                         seriesCount: Int = 5,
-                         storiesCount: Int = 5) -> Hero {
+                         eventsCount: Int = 6,
+                         seriesCount: Int = 7,
+                         storiesCount: Int = 7) -> Hero {
         Hero(id: 1,
              name: name,
              description: description,

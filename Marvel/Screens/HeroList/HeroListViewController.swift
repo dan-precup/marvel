@@ -34,6 +34,7 @@ final class HeroListViewController: UIViewController {
         table.dataSource = self
         table.separatorStyle = .none
         table.setEmptyViewText()
+        table.backgroundView?.isHidden = false
         return table
     }()
         
@@ -66,8 +67,10 @@ final class HeroListViewController: UIViewController {
         view.backgroundColor = .systemBackground
         tableView.addAndPinAsSubview(of: view)
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Marvel heros"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didSelectSearch))
+        title = "Marvel Heros"
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didSelectSearch))
+        searchButton.accessibilityIdentifier = "trailingSearchButton"
+        navigationItem.rightBarButtonItem = searchButton
         navigationController?.navigationBar.tintColor = .label
     }
     
@@ -77,6 +80,7 @@ final class HeroListViewController: UIViewController {
             .sink(receiveValue: { [weak self] newHeroes in
                 guard let self = self, !newHeroes.isEmpty else { return }
                 let offsetStart = self.heros.count
+                self.tableView.setEmptyViewIfNeededFor(count: self.heros.count)
                 self.heros.append(contentsOf: newHeroes)
                 self.tableView.beginUpdates()
                 self.tableView.insertRows(at: newHeroes.enumerated().map({ IndexPath(row: offsetStart + $0.offset, section: 0)}), with: .automatic)

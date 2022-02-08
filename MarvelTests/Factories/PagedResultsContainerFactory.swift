@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import Marvel
 
 final class PagedResultsContainerFactory {
     static func make<T: Codable>(offset: Int = 0, total: Int = 0, count: Int = 0, limit: Int = 5, results: [T]) -> PagedResultsContainer<T>  {

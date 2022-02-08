@@ -79,6 +79,7 @@ final class HeroDetailsViewController: UIViewController {
             .background(.systemGroupedBackground)
             .addAndPinAsSubview(of: view)
         closeButton
+            .identifier("closeButton")
             .constrained()
             .addAsSubview(of: view)
             .top(to: view, constant: Constants.topConstraintForCloseButton)
