@@ -11,7 +11,7 @@ final class SectionTitleCell: UITableViewCell {
     private struct Constants {
         static let titleTextSize: CGFloat = 20
     }
-    private let titleLabel = UILabel.make(weight: .bold, size: Constants.titleTextSize, numberOfLines: 1)
+    private let titleLabel = UILabel.make(weight: .bold, size: Constants.titleTextSize, numberOfLines: 1).identifier("sectionTitleLabel")
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()

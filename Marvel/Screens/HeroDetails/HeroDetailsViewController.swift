@@ -7,12 +7,12 @@
 
 import Combine
 import UIKit
-import AVKit
 
 final class HeroDetailsViewController: UIViewController {
     
     private struct Constants {
         static let heroNameSize: CGFloat = 30
+        static let topConstraintForCloseButton: CGFloat = 50
     }
     
     /// Local cell container
@@ -25,8 +25,8 @@ final class HeroDetailsViewController: UIViewController {
     private let spinner = UIActivityIndicatorView.make(started: true)
 
     private var bag = Set<AnyCancellable>()
-    private var videoLooper: AVPlayerLooper?
-    private let videoView = UIView()
+    
+    private let closeButton = UIButton()
 
     /// Cell ids
     private let statsCellId = "statsCellId"
@@ -44,8 +44,8 @@ final class HeroDetailsViewController: UIViewController {
         table.register(LargeTextCell.self, forCellReuseIdentifier: largeTextCellId)
         table.register(HeroDetailsComicCell.self, forCellReuseIdentifier: comicCellId)
         table.delegate = self
-        table.showsVerticalScrollIndicator = false
         table.contentInsetAdjustmentBehavior = .never
+        table.showsVerticalScrollIndicator = false
         table.dataSource = self
         table.separatorStyle = .none
         table.setEmptyViewText()
@@ -61,6 +61,11 @@ final class HeroDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -68,33 +73,21 @@ final class HeroDetailsViewController: UIViewController {
         viewModel.didFinishLoading()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard let videoURL = Bundle.main.url(forResource: "bgVideo", withExtension: "mp4") else { return }
-        let asset = AVAsset(url: videoURL)
-        let item = AVPlayerItem(asset: asset)
-        let player = AVQueuePlayer(playerItem: item)
-        videoLooper = AVPlayerLooper(player: player, templateItem: item)
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = videoView.bounds
-        playerLayer.videoGravity = .resizeAspectFill
-        videoView.layer.addSublayer(playerLayer)
-        player.volume = 0
-        player.play()
-    }
-    
-
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        videoView.addAndPinAsSubview(of: view)
-        UIView().background(.black.withAlphaComponent(0.8))
-            .addAndPinAsSubview(of: view)
+        view.backgroundColor = .clear
         tableView
-            .background(.clear)
-            .wrapAndPin(padding: UIConstants.spacingDouble)
-            .addAndPinAsSubview(of: view)
-            .rounded(radius: UIConstants.radiusLarge)
             .background(.systemGroupedBackground)
+            .addAndPinAsSubview(of: view)
+        closeButton
+            .identifier("closeButton")
+            .constrained()
+            .addAsSubview(of: view)
+            .top(to: view, constant: Constants.topConstraintForCloseButton)
+            .trailing(to: view, constant: -UIConstants.spacingTripe)
+            .tinted(.white)
+            .setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
+        closeButton.addTarget(self, action: #selector(didSelectCloseButton), for: .touchUpInside)
+        closeButton.isHidden = !isBeingPresented
     }
     
     private func setupBindings() {
@@ -108,7 +101,12 @@ final class HeroDetailsViewController: UIViewController {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.isReachingEnd() else { return }
-//        viewModel.loadNextPageIfPossible()
+        viewModel.loadNextPageIfPossible()
+    }
+    
+    
+    @objc private func didSelectCloseButton() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -125,10 +123,10 @@ extension HeroDetailsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellType = cells[safe: indexPath.row] else { return UITableViewCell() }
         switch cellType {
-        case .imageAndName(let thumbURL, let heroName):
+        case .imageAndName(let hero):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: nameImageCellId, for: indexPath) as? HeroDetailsNameImageCell
             else { return UITableViewCell() }
-            cell.setData(imageURL: thumbURL, name: heroName)
+            cell.setHero(hero)
             return cell
         case .stats(let hero):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: statsCellId, for: indexPath) as? HeroDetailsStatsCell

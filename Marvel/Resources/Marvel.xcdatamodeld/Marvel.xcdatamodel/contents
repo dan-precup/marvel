@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="RequestCache" representedClassName="RequestCache" syncable="YES" codeGenerationType="class">
+        <attribute name="cacheKey" attributeType="String"/>
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="expiresAt" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="RequestCache" positionX="-63" positionY="-18" width="128" height="74"/>
+    </elements>
 </model>

@@ -15,9 +15,9 @@ final class HeroDetailsStatsCell: UITableViewCell {
     }
   
     /// Value labels
-    private let eventsValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1)
-    private let storiesValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1)
-    private let comicsValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1)
+    private let eventsValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1).identifier("eventsValue")
+    private let storiesValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1).identifier("storiesValue")
+    private let comicsValueLabel = UILabel.make(size: Constants.textSize, color: .secondaryLabel, numberOfLines: 1).identifier("comicsValue")
     
     /// Stacks
     private lazy var eventsStack = makeStatStack(valueLabel: eventsValueLabel, title: "Events", imageName: "calendar")
@@ -38,9 +38,9 @@ final class HeroDetailsStatsCell: UITableViewCell {
         background(.clear)
         [ eventsStack,storiesStack, comicsStack].hStack(distribution: .fillEqually)
             .wrapAndPin(padding: UIConstants.spacingDouble)
-            .background(.systemBackground)
+            .background(.secondarySystemGroupedBackground)
             .rounded()
-            .addAndPinAsSubview(to: contentView)
+            .addAndPinAsSubview(of: contentView, horizontalPadding: UIConstants.spacingDouble)
     }
     
     func setHero(_ hero: Hero) {

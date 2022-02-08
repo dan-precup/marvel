@@ -63,8 +63,8 @@ final class SearchResultCell: UITableViewCell {
         
     }
     
-    func setResult(_ result: SearchResult) {
-        resultNameLabel.text = result.name
-        resultImage.sd_setImage(with: result.imageURL, placeholderImage: UIImage(systemName: "photo"))
+    func setHero(_ hero: Hero) {
+        resultNameLabel.text = hero.name
+        resultImage.sd_setImage(with: hero.thumbnail.url, placeholderImage: UIImage(systemName: "photo"))
     }
 }

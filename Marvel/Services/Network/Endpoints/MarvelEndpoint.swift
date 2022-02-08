@@ -39,6 +39,17 @@ extension MarvelEndpoint: NetworkEndpoint {
         }
     }
     
+    var localCacheSignature: String? {
+        switch self {
+        case .heroList(let page, let perPage):
+            return "heroList_\(page)_\(perPage)"
+        case .heroComics(let page, let perPage, let heroId):
+            return "heroComics\(page)_\(perPage)_\(heroId)"
+        case .heroSearch(let page, let perPage, let searchTerm):
+            return "heroSearch\(page)_\(perPage)_\(searchTerm)"
+        }
+    }
+    
     private func makePagingURLQueryItems(page: Int, perPage: Int, additionalQueryItems: [URLQueryItem] = []) -> [URLQueryItem] {
         [
             URLQueryItem(name: "offset", value: "\(page * perPage)"),

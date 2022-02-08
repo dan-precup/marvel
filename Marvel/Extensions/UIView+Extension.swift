@@ -405,10 +405,28 @@ extension UIView {
     }
     
     @discardableResult
+    func unclipped() -> Self {
+        clipsToBounds = false
+        return self
+    }
+    
+    @discardableResult
     func circle() -> Self {
        layoutIfNeeded()
         return clipped().rounded(radius: frame.width / 2)
     }
+    
+    @discardableResult
+      func shadow(_ radius: CGFloat = 5,
+                  color: UIColor = .black,
+                  shadowOpacity: Float = 0.4,
+                  offset: CGSize = .zero) -> Self {
+          layer.shadowRadius = radius
+          layer.shadowColor = color.cgColor
+          layer.shadowOpacity = shadowOpacity
+          layer.shadowOffset = offset
+          return self
+      }
 }
 
 extension Array where Element: UIView {

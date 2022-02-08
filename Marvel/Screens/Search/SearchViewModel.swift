@@ -11,15 +11,16 @@ import Combine
 protocol SearchViewCoordinator: HeroNavigatable, Coordinatable {}
 
 protocol SearchViewModel: LoadingNotifier {
-    var results: CurrentValueSubject<[SearchResult], Never> { get }
+    var results: CurrentValueSubject<[Hero], Never> { get }
     func didTypeSearchTerm(_ term: String)
+    func didSelectHero(_ hero: Hero)
     func loadNextPageIfPossible()
 }
 
 final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     
     /// The results container
-    let results = CurrentValueSubject<[SearchResult], Never>([])
+    let results = CurrentValueSubject<[Hero], Never>([])
     
     /// The coordinator
     private let coordinator: SearchViewCoordinator
@@ -43,7 +44,7 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     private var hasNextPage = true
     
     /// The search term
-    private var term = ""
+    private(set) var term = ""
     
     init(coordinator: SearchViewCoordinator, marvelService: MarvelService = ServiceRegistry.shared.marvelService) {
         self.coordinator = coordinator
@@ -62,7 +63,7 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
     
     /// Reset everything and run the search
     /// - Parameter term: The term
-    private func runSearch(on term: String) {
+    func runSearch(on term: String) {
         self.term = term
         currentPage = -1
         results.value = []
@@ -77,10 +78,15 @@ final class SearchViewModelImpl: BaseViewModel, SearchViewModel {
         isLoading.value = true
         currentPage += 1
         searchCancellable = handlePublisherWithoutStoring(marvelService.searchForHero(nameStartingWith: term, page: currentPage, perPage: maxPerPage), completion: { [weak self] pagedResults in
-            self?.results.value.append(contentsOf: pagedResults.results.map({ SearchResult.fromHero($0) }))
+            self?.results.value.append(contentsOf: pagedResults.results)
             self?.hasNextPage = pagedResults.hasNextPage
             self?.isLoading.value = false
         })
+    }
+    
+    func didSelectHero(_ hero: Hero) {
+        coordinator.dismiss()
+        coordinator.pushToHero(hero)
     }
 }
 

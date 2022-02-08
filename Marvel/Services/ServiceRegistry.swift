@@ -15,5 +15,19 @@ final class ServiceRegistry {
     
     /// The local persistence layer
     let localStorage: LocalStorageService = CoreDataStorage()
-    lazy var marvelService: MarvelService = MarvelServiceImpl.shared
+    
+    /// The marvel service
+    lazy var marvelService: MarvelService = {
+        // Inject the mock service for UI tests
+        if ProcessInfo.processInfo.arguments.contains("testMode") {
+            let service = HeroServiceMock()
+            service.setMockFlags(HeroMockFlag.extractListFromStrings(ProcessInfo.processInfo.arguments))
+            return service
+        } else {
+            return MarvelServiceImpl.shared
+        }
+    }()
+
+    /// The cache service
+    lazy var cacheService: CacheService = CacheServiceImpl.shared
 }

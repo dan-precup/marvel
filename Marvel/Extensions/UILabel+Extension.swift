@@ -15,13 +15,6 @@ extension UILabel {
             .color(color)
             .lines(numberOfLines)
     }
-
-    static func withStyle(_ text: String = "", textStyle: UIFont.TextStyle, color: UIColor = .label, numberOfLines: Int = 0) -> UILabel {
-        return UILabel(frame: .zero).text(text)
-            .textStyle(textStyle)
-            .color(color)
-            .lines(numberOfLines)
-    }
     
     @discardableResult
     func shrinkToFit(minScale: CGFloat = 0.2) -> Self {
@@ -85,5 +78,14 @@ extension UILabel {
         return self
     }
 
+    @discardableResult
+    func textShadow(_ color: UIColor = .darkText) -> Self {
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 0.5
+        layer.shadowOpacity = 1
+        return self
+    }
+    
 }
 

@@ -20,16 +20,16 @@ final class SearchViewController: UIViewController {
     private let viewModel: SearchViewModel
     
     /// Blured backgound
-    private let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterialDark))
+    private let blurBackground = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     /// The searcg textfield
-    private let searchTextfield = UITextField()
+    private let searchTextfield = UITextField().identifier("searchTextField")
     
     /// Cell id
     private let searchCellResultId = "searchCellResultId"
     
     /// Search results container
-    private var searchResults = [SearchResult]()
+    private var searchResults = [Hero]()
     
     /// The close button
     private let closeButton = UIButton()
@@ -41,7 +41,7 @@ final class SearchViewController: UIViewController {
         table.showsVerticalScrollIndicator = false
         table.dataSource = self
         table.separatorStyle = .none
-        table.setEmptyViewText()
+        table.setEmptyViewText("No results yet", color: .white)
         return table
     }()
         
@@ -85,6 +85,7 @@ final class SearchViewController: UIViewController {
         spinner.color = .white
         
         closeButton
+            .identifier("closeButton")
             .constrained()
             .addAsSubview(of: view)
             .topTrailingCorner(to: view, top: 0, trailing: -UIConstants.spacingTripe)
@@ -124,6 +125,7 @@ final class SearchViewController: UIViewController {
             .sink(receiveValue: { [weak self] results in
                 self?.searchResults = results
                 self?.tableView.reloadData()
+                self?.tableView.setEmptyViewIfNeededFor(count: results.count)
             }).store(in: &bag)
         spinner.visibilityBindedTo(viewModel, storedIn: &bag)
     }
@@ -154,17 +156,20 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         spinner.wrapAndPin(top: UIConstants.spacingDouble, bottom: -UIConstants.spacingDouble)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let hero = searchResults[safe: indexPath.row] else { return }
+        viewModel.didSelectHero(hero)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let result = searchResults[safe: indexPath.row],
+        guard let hero = searchResults[safe: indexPath.row],
               let cell = tableView.dequeueReusableCell(withIdentifier: searchCellResultId, for: indexPath) as? SearchResultCell
         else { return UITableViewCell() }
-        cell.setResult(result)
+        cell.setHero(hero)
         return cell
     }
-    
-    
 }

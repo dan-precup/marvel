@@ -11,9 +11,12 @@ import Combine
 protocol HeroListCoordinator: Coordinatable, HeroNavigatable {
     func presentSearch()
 }
-protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener, HeroCellSearchDelegate {
+
+protocol HeroListViewModel: LoadingNotifier, ViewLoadedListener {
     var heroes: CurrentValueSubject<[Hero], Never> { get }
     func loadNextPageIfPossible()
+    func didSelectHero(_ hero: Hero)
+    func didSelectSearch()
 }
 
 final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
@@ -31,7 +34,7 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
     private var currentPage = -1
     
     /// The max number of items requested per page
-    private let maxPerPage = 2
+    private let maxPerPage = 10
     
     /// Flag for signaling if we can load a new page
     private var hasNextPage = true
@@ -58,15 +61,12 @@ final class HeroListViewModelImpl: BaseViewModel, HeroListViewModel {
         })
     }
     
-    
-    //MARK: - Implement HeroCellSearchDelegate
-    
-    func heroCellDidSelectSearch() {
-        coordinator.presentSearch()
+    func didSelectHero(_ hero: Hero) {
+        coordinator.presentAnimatedHero(hero)
     }
     
-    func heroCellDidSelectDetails(for hero: Hero) {
-        coordinator.pushToHero(hero)
+    func didSelectSearch() {
+        coordinator.presentSearch()
     }
 }
 
